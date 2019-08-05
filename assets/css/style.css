@@ -1,0 +1,28 @@
+header{
+  text-align: center;
+  height: 100px;
+  background-color: black;
+}
+
+img{
+  width: 200px;
+  margin: 10px 0px;
+}
+
+
+.col-md-9{
+  background-color: aquamarine;
+}
+.col-md-3{
+  background-color: yellow;
+}
+
+
+#target {
+  background-color: red;
+}
+
+#player {
+  background-color: green;
+}
+

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Star Wars RPG</title>
+  <!-- stylesheets -->
+  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <!-- javascript files -->
+  <script src="assets/javascript/game.js"></script>
+
+
+</head>
+
+<body>
+
+  <header>
+    <img src="assets/images/hyperspeed.jpeg" alt="hyperspeed" id="hyperspeed">
+
+  </header>
+  <main>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9 text-center" id="char-choices">
+          <!-- This row will be used to hold the character choices. -->
+          <img src="assets/images/darth-vader.jpeg" alt="darth-vader" id="darth-vader">
+          <img src="assets/images/obi-wan.jpg" alt="obi-wan" id="obi-wan">
+          <img src="assets/images/palpatine.png" alt="palpatine" id="palpatine">
+          <img src="assets/images/skywalker.jpg" alt="skywalker" id="skywalker">
+        </div>
+        <div class="col-md-3 text-center" id="graveyard-1">
+          <!-- this div will contain the photo of the first defeated fighter -->
+          <img src="assets/images/darth-vader.jpeg" alt="darth-vader" id="darth-vader">
+        </div>
+      </div>
+      <div class="row">
+        <!-- This row will hold the attacker's target -->
+        <div class="col-md-9 text-center" id="target">
+            <img src="assets/images/palpatine.png" alt="palpatine" id="palpatine">
+        </div>
+        <div class="col-md-3 text-center" id="graveyard-2">
+          <!-- this div will contain the photo of the second defeated fighter -->
+          
+        </div>
+      </div>
+      <div class="row">
+        <!-- This row will hold the attacking player -->
+        <div class="col-md-9 text-center" id="player">
+            <img src="assets/images/skywalker.jpg" alt="skywalker" id="skywalker">
+        </div>
+        <div class="col-md-3 text-center" id="graveyard-3">
+            <!-- this div will contain the photo of the last defeated fighter -->
+            
+          </div>
+      </div>
+      <div class="row">
+        <!-- This row will contain the controls -->
+        <div class="col-md-9 text-center" id="controls">
+          <button class="btn btn-danger">Attack</button>
+        </div>
+        <div class="col-md-3 text-center">
+          <!-- empty for now, maybe restart button? -->
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+  </main>
+
+  <footer>
+
+  </footer>
+</body>
+
+</html>
