@@ -29,10 +29,27 @@
       <div class="row">
         <div class="col-md-9 text-center" id="char-choices">
           <!-- This row will be used to hold the character choices. -->
-          <img src="assets/images/darth-vader.jpeg" alt="darth-vader" id="darth-vader">
-          <img src="assets/images/obi-wan.jpg" alt="obi-wan" id="obi-wan">
-          <img src="assets/images/palpatine.png" alt="palpatine" id="palpatine">
-          <img src="assets/images/skywalker.jpg" alt="skywalker" id="skywalker">
+          <div class="row">
+          <div class="col-md-3 combatants" id="darth-vader-fighter">
+            <img src="assets/images/darth-vader.jpeg" alt="darth-vader" id="darth-vader">
+            <span class="hp">Health Points: <span id="darth-vader-hp"></span></span>
+          </div>
+
+          <div class="col-md-3 combatants" id="obi-wan-fighter">
+            <img src="assets/images/obi-wan.jpg" alt="obi-wan" id="obi-wan">
+            <span class="hp">Health Points: <span id="obi-wan-hp"></span></span>
+          </div>
+
+          <div class="col-md-3 combatants" id="palpatine-fighter">
+            <img src="assets/images/palpatine.png" alt="palpatine" id="palpatine">
+            <span class="hp">Health Points: <span id="palpatine-hp"></span></span>
+          </div>
+
+          <div class="col-md-3 combatants" id="skywalker-fighter">
+            <img src="assets/images/skywalker.jpg" alt="skywalker" id="skywalker">
+            <span class="hp">Health Points: <span id="skywalker-hp"></span></span>
+          </div>
+        </div>
         </div>
         <div class="col-md-3 text-center" id="graveyard-1">
           <!-- this div will contain the photo of the first defeated fighter -->
@@ -42,22 +59,22 @@
       <div class="row">
         <!-- This row will hold the attacker's target -->
         <div class="col-md-9 text-center" id="target">
-            <img src="assets/images/palpatine.png" alt="palpatine" id="palpatine">
+          <img src="assets/images/palpatine.png" alt="palpatine" id="palpatine">
         </div>
         <div class="col-md-3 text-center" id="graveyard-2">
           <!-- this div will contain the photo of the second defeated fighter -->
-          
+
         </div>
       </div>
       <div class="row">
         <!-- This row will hold the attacking player -->
         <div class="col-md-9 text-center" id="player">
-            <img src="assets/images/skywalker.jpg" alt="skywalker" id="skywalker">
+          <img src="assets/images/skywalker.jpg" alt="skywalker" id="skywalker">
         </div>
         <div class="col-md-3 text-center" id="graveyard-3">
-            <!-- this div will contain the photo of the last defeated fighter -->
-            
-          </div>
+          <!-- this div will contain the photo of the last defeated fighter -->
+
+        </div>
       </div>
       <div class="row">
         <!-- This row will contain the controls -->
