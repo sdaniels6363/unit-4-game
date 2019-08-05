@@ -12,6 +12,7 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   <!-- javascript files -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="assets/javascript/game.js"></script>
 
 
@@ -33,21 +34,29 @@
           <div class="col-md-3 combatants" id="darth-vader-fighter">
             <img src="assets/images/darth-vader.jpeg" alt="darth-vader" id="darth-vader">
             <span class="hp">Health Points: <span id="darth-vader-hp"></span></span>
+            <span class="attack">Attack Points:<span id="darth-vader-attack"></span></span>
+            <span class="counter">Counter Points:<span id="darth-vader-counter"></span></span>
           </div>
 
           <div class="col-md-3 combatants" id="obi-wan-fighter">
             <img src="assets/images/obi-wan.jpg" alt="obi-wan" id="obi-wan">
             <span class="hp">Health Points: <span id="obi-wan-hp"></span></span>
+            <span class="attack">Attack Points:<span id="obi-wan-attack"></span></span>
+            <span class="counter">Counter Points:<span id="obi-wan-counter"></span></span>
           </div>
 
           <div class="col-md-3 combatants" id="palpatine-fighter">
             <img src="assets/images/palpatine.png" alt="palpatine" id="palpatine">
             <span class="hp">Health Points: <span id="palpatine-hp"></span></span>
+            <span class="attack">Attack Points:<span id="palpatine-attack"></span></span>
+            <span class="counter">Counter Points:<span id="palpatine-counter"></span></span>
           </div>
 
           <div class="col-md-3 combatants" id="skywalker-fighter">
             <img src="assets/images/skywalker.jpg" alt="skywalker" id="skywalker">
             <span class="hp">Health Points: <span id="skywalker-hp"></span></span>
+            <span class="attack">Attack Points:<span id="skywalker-attack"></span></span>
+            <span class="counter">Counter Points:<span id="skywalker-counter"></span></span>
           </div>
         </div>
         </div>
@@ -59,7 +68,7 @@
       <div class="row">
         <!-- This row will hold the attacker's target -->
         <div class="col-md-9 text-center" id="target">
-          <img src="assets/images/palpatine.png" alt="palpatine" id="palpatine">
+          <img src="assets/images/palpatine.png" alt="palpatine" id="palpatine"> <!-- Placeholder for now -->
         </div>
         <div class="col-md-3 text-center" id="graveyard-2">
           <!-- this div will contain the photo of the second defeated fighter -->

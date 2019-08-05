@@ -5,8 +5,23 @@ header{
 }
 
 img{
+  position: relative;
   width: 200px;
   margin: 10px 0px;
+}
+
+.combatants{
+  width: 100%;
+  margin: 0;
+}
+
+.hp{
+  background-color: #ffffff;
+  color: #000000;
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  width: 200px;
 }
 
 
