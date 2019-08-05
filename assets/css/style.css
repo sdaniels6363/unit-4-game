@@ -11,8 +11,11 @@ img{
 }
 
 .combatants{
+  background-color: aquamarine;
   width: 100%;
   margin: 0;
+  padding: 0px 7.5px;
+  height: 220px;
 }
 
 .hp{
@@ -20,10 +23,27 @@ img{
   color: #000000;
   position: absolute;
   bottom: 10px;
-  left: 15px;
+  left: 7.5px;
   width: 200px;
 }
 
+.counter{
+  background-color: #ffffff;
+  color: #000000;
+  position: absolute;
+  bottom: 30px;
+  left: 7.5px;
+  width: 200px;
+}
+
+.attack{
+    background-color: #ffffff;
+  color: #000000;
+  position: absolute;
+  bottom: 50px;
+  left: 7.5px;
+  width: 200px;
+}
 
 .col-md-9{
   background-color: aquamarine;
@@ -32,12 +52,21 @@ img{
   background-color: yellow;
 }
 
+#controls{
+  margin: 10px 0px;
+}
 
 #target {
+  width: 100%;
+  height: 170px;
+  margin-top: 10px;
   background-color: red;
 }
 
 #player {
+  width: 100%;
+  height: 170px;
+  margin-top: 10px;
   background-color: green;
 }
 
