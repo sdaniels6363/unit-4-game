@@ -6,26 +6,57 @@ $(document).ready(function () {
   $("#graveyard-2").empty();
   $("#graveyard-3").empty();
 
-  function randomNumber(min,max){ // used to generate HP, attack, and counter
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
+  function randomNumber(min, max) { // used to generate HP, attack, and counter
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function generateCharAttrs(id) {
+    // this function is responsible for generating each fighter's attributes
+    var character = "#" + id;
+    var htmlHP = "#" + id + "-hp"; // used for the HP value
+    var htmlAtt = "#" + id + "-attack"; // used for the attack value
+    var htmlCtr = "#" + id + "-counter"; // used for the counter-attack value
+    var dataHP = randomNumber(60, 100);
+    var dataAtt = randomNumber(5, 10);
+    var dataCtr = randomNumber(1, 9);
+
+    // set the content of the actual text to display
+    $(htmlHP).text(dataHP); // used for the HP value
+    $(htmlAtt).text(dataAtt); // used for the attack value
+    $(htmlCtr).text(dataCtr); // used for the counter-attack value
+    // set the attributes of the fighter button
+    $(character).attr("data-hp", dataHP); // used for the HP value
+    $(character).attr("data-attack", dataAtt);// used for the attack value
+    $(character).attr("data-counter", dataCtr);// used for the counter-attack value
   }
 
   // generate HP settings for characters
-  $("#darth-vader-hp").text(randomNumber(60,100));
-  $("#obi-wan-hp").text(randomNumber(60,100));
-  $("#palpatine-hp").text(randomNumber(60,100));
-  $("#skywalker-hp").text(randomNumber(60,100));
+  generateCharAttrs("darth-vader");
+  generateCharAttrs("obi-wan");
+  generateCharAttrs("palpatine");
+  generateCharAttrs("skywalker");
 
-  // generate attack/counter-attack power ratings
-  $("#darth-vader-attack").text(randomNumber(5,10));
-  $("#obi-wan-attack").text(randomNumber(5,10));
-  $("#palpatine-attack").text(randomNumber(5,10));
-  $("#skywalker-attack").text(randomNumber(5,10));
-
-  $("#darth-vader-counter").text(randomNumber(1,9));
-  $("#obi-wan-counter").text(randomNumber(1,9));
-  $("#palpatine-counter").text(randomNumber(1,9));
-  $("#skywalker-counter").text(randomNumber(1,9));
+  // Inform player they need to select a character.
+  $("#player").html('<div id="step-1-instructions">Select a character from above to play as!</div>')
 
 });
+
+// once game loads, have player choose character
+var player = $(".combatants").on("click", function () {
+  var selected = $(this).attr(id);
+  var character = "#"+selected;
+  alert(character);
+
+
+
+});
+
+// after player has been selected, require the player to select an opponent
+
+// once opponent reaches zero hp or less, select a new opponent
+
+
+
+
+
 
