@@ -70,3 +70,8 @@ img{
   background-color: green;
 }
 
+#step-1-instructions{
+  text-align: center;
+  padding-top: 25px;
+  color: #ffffff;
+}
