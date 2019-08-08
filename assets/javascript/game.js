@@ -36,26 +36,60 @@ $(document).ready(function () {
   generateCharAttrs("palpatine");
   generateCharAttrs("skywalker");
 
+  // initial state
+  var playerSelected = false;
+
   // Inform player they need to select a character.
   $("#player").html('<div id="step-1-instructions">Select a character from above to play as!</div>')
+  // Add buttons to controls
+  $("#controls").html('<button class="btn btn-success" id="confirm-player">Confirm Player Selection</button><button class="btn btn-info" id="reset">Reset</button>')
+
+  // once game loads, have player choose character
+  $(".combatants").on("click", function () {
+    var player = $("#player");
+    var character = this.id;
+    var selected = "#" + character;
+    if (player.html().includes("Select a")) {
+      $(player).empty();
+      $(selected).appendTo(player);
+      console.log("moved " + selected + " to player zone.")
+    } else if (playerSelected) {
+      var enemy = "#" + character;
+      $(enemy).appendTo("#target");
+    } else if (player.attr("id")) {
+      var prevSelected = $(player).find('button')
+      $(prevSelected).appendTo(".fighters");
+      $(player).empty();
+      $(selected).appendTo(player);
+      console.log("replaced previous character");
+
+    }
+  });
+
+  $("#confirm-player").on("click", function () {
+    // lock in chosen player
+    playerSelected = true;
+    $("target").html("<h3>Select an enemy!</h3>");
+    console.log("player hit confirm.")
+  });
+
+  $("#reset").on("click", function () {
+    var player = $("#player");
+    var target = $("#target");
+    $(player).appendTo(".fighters");
+    $(target).appendTo(".fighters")
+    $(player).empty();
+    $(target).empty();
+    console.log("reset game");
+  });
+
+
+
+
+
+
 
 });
-
-// once game loads, have player choose character
-var player = $(".combatants").on("click", function () {
-  var selected = $(this).attr(id);
-  var character = "#"+selected;
-  alert(character);
-
-
-
-});
-
-// after player has been selected, require the player to select an opponent
-
-// once opponent reaches zero hp or less, select a new opponent
-
-
 
 
 

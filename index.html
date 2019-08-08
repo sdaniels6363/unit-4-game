@@ -30,34 +30,34 @@
       <div class="row">
         <div class="col-md-9 text-center" id="char-choices">
           <!-- This row will be used to hold the character choices. -->
-          <div class="row">
-            <button class="col-md-3 combatants" id="darth-vader" data-hp="" data-attack="" data-counter="">
-              <img src="assets/images/darth-vader.jpeg" alt="darth-vader">
-              <span class="hp">Health Points: <span id="darth-vader-hp"></span></span>
-              <span class="attack">Attack Points:<span id="darth-vader-attack"></span></span>
-              <span class="counter">Counter Points:<span id="darth-vader-counter"></span></span>
-            </button>
+          <div class="row fighters" >
+              <button class="col-md-3 combatants" id="darth-vader" data-hp="" data-attack="" data-counter="">
+                <img src="assets/images/darth-vader.jpeg" alt="darth-vader">
+                <span class="hp">Health Points: <span id="darth-vader-hp"></span></span>
+                <span class="attack">Attack Points:<span id="darth-vader-attack"></span></span>
+                <span class="counter">Counter Points:<span id="darth-vader-counter"></span></span>
+              </button>
 
-            <button class="col-md-3 combatants" id="obi-wan" data-hp="" data-attack="" data-counter="">
-              <img src="assets/images/obi-wan.jpg" alt="obi-wan">
-              <span class="hp">Health Points: <span id="obi-wan-hp"></span></span>
-              <span class="attack">Attack Points:<span id="obi-wan-attack"></span></span>
-              <span class="counter">Counter Points:<span id="obi-wan-counter"></span></span>
-            </button>
+              <button class="col-md-3 combatants" id="obi-wan" data-hp="" data-attack="" data-counter="">
+                <img src="assets/images/obi-wan.jpg" alt="obi-wan">
+                <span class="hp">Health Points: <span id="obi-wan-hp"></span></span>
+                <span class="attack">Attack Points:<span id="obi-wan-attack"></span></span>
+                <span class="counter">Counter Points:<span id="obi-wan-counter"></span></span>
+              </button>
 
-            <button class="col-md-3 combatants" id="palpatine" data-hp="" data-attack="" data-counter="">
-              <img src="assets/images/palpatine.png" alt="palpatine">
-              <span class="hp">Health Points: <span id="palpatine-hp"></span></span>
-              <span class="attack">Attack Points:<span id="palpatine-attack"></span></span>
-              <span class="counter">Counter Points:<span id="palpatine-counter"></span></span>
-            </button>
+              <button class="col-md-3 combatants" id="palpatine" data-hp="" data-attack="" data-counter="">
+                <img src="assets/images/palpatine.png" alt="palpatine">
+                <span class="hp">Health Points: <span id="palpatine-hp"></span></span>
+                <span class="attack">Attack Points:<span id="palpatine-attack"></span></span>
+                <span class="counter">Counter Points:<span id="palpatine-counter"></span></span>
+              </button>
 
-            <button class="col-md-3 combatants" id="skywalker" data-hp="" data-attack="" data-counter="">
-              <img src="assets/images/skywalker.jpg" alt="skywalker">
-              <span class="hp">Health Points: <span id="skywalker-hp"></span></span>
-              <span class="attack">Attack Points:<span id="skywalker-attack"></span></span>
-              <span class="counter">Counter Points:<span id="skywalker-counter"></span></span>
-            </button>
+              <button class="col-md-3 combatants" id="skywalker" data-hp="" data-attack="" data-counter="">
+                <img src="assets/images/skywalker.jpg" alt="skywalker">
+                <span class="hp">Health Points: <span id="skywalker-hp"></span></span>
+                <span class="attack">Attack Points:<span id="skywalker-attack"></span></span>
+                <span class="counter">Counter Points:<span id="skywalker-counter"></span></span>
+              </button>
           </div>
         </div>
         <div class="col-md-3 text-center" id="graveyard-1">
@@ -67,8 +67,7 @@
       </div>
       <div class="row">
         <!-- This row will hold the attacker's target -->
-        <div class="col-md-9 text-center" id="target">
-          <img src="assets/images/palpatine.png" alt="palpatine" id="palpatine"> <!-- Placeholder for now -->
+        <div class="col-md-9 text-center" id="target" >
         </div>
         <div class="col-md-3 text-center" id="graveyard-2">
           <!-- this div will contain the photo of the second defeated fighter -->
@@ -77,7 +76,7 @@
       </div>
       <div class="row">
         <!-- This row will hold the attacking player -->
-        <div class="col-md-9 text-center" id="player">
+        <div class="col-md-9 text-center" id="player" >
         </div>
         <div class="col-md-3 text-center" id="graveyard-3">
           <!-- this div will contain the photo of the last defeated fighter -->
@@ -86,14 +85,8 @@
       </div>
       <div class="row">
         <!-- This row will contain the controls -->
-        <div class="col-md-9 text-center" id="controls">
-          <div class="row">
-            <div class="col-md-6">
-              <button class="btn btn-danger" id="attack">Attack</button>
-            </div>
-            <div class="col-md-6">
-              <button class="btn btn-info" id="restart">Restart</button>
-            </div>
+        <div class="col-md-9 text-center">
+          <div class="row" id="controls">
           </div>
         </div>
         <div class="col-md-3 text-center">
