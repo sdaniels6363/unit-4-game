@@ -6,9 +6,9 @@ $(document).ready(function () {
   $("#graveyard-2").empty();
   $("#graveyard-3").empty();
 
-  function randomNumber(min, max) { // used to generate HP, attack, and counter
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+  function randomNumber(min, max) { // used to generate HP, attack, and counter, goes in increments of 10
+    return Math.round((Math.random()*(max-min)+min)/10)*10;
+   }
 
   function generateCharAttrs(id) {
     // this function is responsible for generating each fighter's attributes
@@ -17,8 +17,8 @@ $(document).ready(function () {
     var htmlAtt = "#" + id + "-attack"; // used for the attack value
     var htmlCtr = "#" + id + "-counter"; // used for the counter-attack value
     var dataHP = randomNumber(60, 100);
-    var dataAtt = randomNumber(5, 10);
-    var dataCtr = randomNumber(1, 9);
+    var dataAtt = randomNumber(10, 30);
+    var dataCtr = randomNumber(20, 50);
 
     // set the content of the actual text to display
     $(htmlHP).text(dataHP); // used for the HP value
@@ -38,11 +38,17 @@ $(document).ready(function () {
 
   // initial state
   var playerSelected = false;
+  var enemySelected = false;
 
   // Inform player they need to select a character.
-  $("#player").html('<div id="step-1-instructions">Select a character from above to play as!</div>')
+  $("#player").html('<div id="step-1-instructions">Choose your character!</div>')
   // Add buttons to controls
   $("#controls").html('<button class="btn btn-success" id="confirm-player">Confirm Player Selection</button><button class="btn btn-info" id="reset">Reset</button>')
+
+  // place the game instructions in the graveyard column, we'll remove them once the player has selected ready.
+  $("#graveyard-1").html("<p>First, choose the character you wish to play as!</p>")
+  $("#graveyard-2").html("<p>Second, choose the character you wish to fight!</p>")
+  $("#graveyard-3").html("<h4>How to Play:</h4><p>Once you have selected your player, the goal is to fight the remaining characters until all of them are defated.  Your enemy's Counter Attack Stat is the one you need to be concerned with.  Your attack stat will double on increment by an increment of itself, on each turn.  For example, if your attack is worth 10, then on turn 2 it's 20, on turn 3 it's 30, and so on.</p>")
 
   // once game loads, have player choose character
   $(".combatants").on("click", function () {
@@ -69,21 +75,34 @@ $(document).ready(function () {
   $("#confirm-player").on("click", function () {
     // lock in chosen player
     playerSelected = true;
-    $("target").html("<h3>Select an enemy!</h3>");
+    $("#controls").html('<button class="btn btn-success" id="confirm-enemy">Confirm Enemy Selection</button><button class="btn btn-info" id="reset">Reset</button>')
+    $("#target").html("<h3>Select an enemy!</h3>");
     console.log("player hit confirm.")
   });
 
-  $("#reset").on("click", function () {
+  $("#confirm-enemy").on("click", function () {
+    // lock in chosen player
+    playerSelected = true;
+    $("#controls").html('<button class="btn btn-danger" id="attack">Attack</button><button class="btn btn-info" id="reset">Reset</button>')
+    $("#target").html("<h3>Select an enemy!</h3>");
+    console.log("player hit confirm.")
+  });
+
+  $("#reset").on("click", function () { // used to reset the game.
     var player = $("#player");
     var target = $("#target");
-    $(player).appendTo(".fighters");
-    $(target).appendTo(".fighters")
+    $(player).find(".combatants").appendTo(".fighters"); // moves player back to character selections
+    $(target).find(".combatants").appendTo(".fighters"); // moves enemy back to character selections
     $(player).empty();
     $(target).empty();
+    playerSelected = false;
+    enemySelected = false;
     console.log("reset game");
   });
 
+  $("#ready").on("click", function(){ // game is ready to start
 
+  });
 
 
 
