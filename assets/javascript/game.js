@@ -1,8 +1,22 @@
 // initial state
 var playerSelected = false;
 var enemySelected = false;
+
 var player;
+var playerName;
+var playerHP;
+var playerAtt;
+var attackMultiplier = 1; // we will increment this each attack cycle
+
 var enemy;
+var enemyName;
+var enemyHP;
+var enemyAtt;
+
+var originalSkywalkerHP; // stored for if the game is reset, before completion.
+var originalVaderHP; // stored for if the game is reset, before completion.
+var orginalPalpatineHP; // stored for if the game is reset, before completion.
+var originalObiWanHP; // stored for if the game is reset, before completion.
 
 // ran as the document is loaded.
 $(document).ready(function () {
@@ -42,6 +56,11 @@ $(document).ready(function () {
   generateCharAttrs("palpatine");
   generateCharAttrs("skywalker");
 
+  originalSkywalkerHP = $("#darth-vader-hp").text();
+  originalVaderHP = $("#obi-wan-hp").text();
+  orginalPalpatineHP = $("#palpatine-hp").text();
+  originalObiWanHP = $("#skywalker-hp").text();
+
   // Inform player they need to select a character.
   $("#player").html('<h3 id="step-instructions">Choose your character!</h3>')
   // Add buttons to controls
@@ -57,14 +76,24 @@ $(document).ready(function () {
     var character = this.id; // get the ID of the selected combatant
     if (playerSelected === false) { // player has not been chosen
       player = "#" + character; // set the global variable
+      playerName = character;
       $("#player").empty();
       $("#" + character).appendTo("#player");
       playerSelected = true;
+      playerAtt = $(player).attr("data-attack");
+      playerHP = $(player).attr("data-hp");
+      $("#graveyard-1").empty();
     } else if (playerSelected === true && enemySelected === false) { // player has been chosen, enemy has not
       enemy = "#" + character;
+      enemyName = character;
       $("#target").empty();
       $(enemy).appendTo("#target");
       enemySelected = true;
+      enemyHP = $(enemy).attr("data-hp");
+      enemyCtr = $(enemy).attr("data-counter");
+      $("#graveyard-2").empty();
+      $("#graveyard-3").empty();
+      $("#graveyard-1").append("<h3>Defeated opponents</h3>")
     } else if (playerSelected === true && enemySelected === true) { // both player/enemy have been selected
       alert("Cannot change characters.");
     }
@@ -73,8 +102,20 @@ $(document).ready(function () {
   });
 
   $("#attack").on("click",function(){
-    if (playerSelected && enemySelected){
-      console.log("attack");
+    if (playerSelected && enemySelected){ // make sure is a player and enemy selected.
+      var damage = parseInt(playerAtt)*parseInt(attackMultiplier);
+      playerHP = playerHP - enemyCtr;
+      enemyHP = enemyHP - damage;
+      playerHtmlHP = player+"-hp";
+      enemyHtmlHP = enemy+"-hp";
+      $(playerHtmlHP).text(playerHP);
+      $(enemyHtmlHP).text(enemyHP);
+      $("#player-notifications").empty();
+      $("#player-notifications").html("You attacked "+enemyName+" for "+damage+" damage.<br>"+enemyName+" countered and dealt "+enemyCtr+" damage to you.");
+      
+      
+
+      attackMultiplier++
     } else {
       alert("Please select your player or opponent.");
     }
