@@ -1,3 +1,9 @@
+// initial state
+var playerSelected = false;
+var enemySelected = false;
+var player;
+var enemy;
+
 // ran as the document is loaded.
 $(document).ready(function () {
   $("#player").empty();
@@ -7,8 +13,8 @@ $(document).ready(function () {
   $("#graveyard-3").empty();
 
   function randomNumber(min, max) { // used to generate HP, attack, and counter, goes in increments of 10
-    return Math.round((Math.random()*(max-min)+min)/10)*10;
-   }
+    return Math.round((Math.random() * (max - min) + min) / 10) * 10;
+  }
 
   function generateCharAttrs(id) {
     // this function is responsible for generating each fighter's attributes
@@ -36,12 +42,8 @@ $(document).ready(function () {
   generateCharAttrs("palpatine");
   generateCharAttrs("skywalker");
 
-  // initial state
-  var playerSelected = false;
-  var enemySelected = false;
-
   // Inform player they need to select a character.
-  $("#player").html('<div id="step-1-instructions">Choose your character!</div>')
+  $("#player").html('<h3 id="step-instructions">Choose your character!</h3>')
   // Add buttons to controls
   $("#controls").html('<button class="btn btn-success" id="confirm-player">Confirm Player Selection</button><button class="btn btn-info" id="reset">Reset</button>')
 
@@ -52,40 +54,37 @@ $(document).ready(function () {
 
   // once game loads, have player choose character
   $(".combatants").on("click", function () {
-    var player = $("#player");
-    var character = this.id;
-    var selected = "#" + character;
-    if (player.html().includes("Select a")) {
-      $(player).empty();
-      $(selected).appendTo(player);
-      console.log("moved " + selected + " to player zone.")
-    } else if (playerSelected) {
-      var enemy = "#" + character;
+    var character = this.id; // get the ID of the selected combatant
+    if (playerSelected === false) { // player has not been chosen
+      player = "#" + character; // set the global variable
+      $("#player").empty();
+      $("#" + character).appendTo("#player");
+    } else if (playerSelected === true && enemySelected === false) { // player has been chosen, enemy has not
+      enemy = "#" + character;
+      $("#target").empty;
       $(enemy).appendTo("#target");
-    } else if (player.attr("id")) {
-      var prevSelected = $(player).find('button')
-      $(prevSelected).appendTo(".fighters");
-      $(player).empty();
-      $(selected).appendTo(player);
-      console.log("replaced previous character");
-
+    } else if (playerSelected === true && enemySelected === true) { // both player/enemy have been selected
+      alert("Cannot change characters.");
     }
+
+
   });
 
   $("#confirm-player").on("click", function () {
     // lock in chosen player
+    $("#controls").empty();
+    $("#controls").html('<button class="btn btn-danger" id="confirm-enemy">Confirm Enemy Selection</button><button class="btn btn-info" id="reset">Reset</button>');
+    $("#target").html('<h3 id="step-instructions">Select an enemy!</h3>');
     playerSelected = true;
-    $("#controls").html('<button class="btn btn-success" id="confirm-enemy">Confirm Enemy Selection</button><button class="btn btn-info" id="reset">Reset</button>')
-    $("#target").html("<h3>Select an enemy!</h3>");
-    console.log("player hit confirm.")
   });
 
   $("#confirm-enemy").on("click", function () {
     // lock in chosen player
-    playerSelected = true;
+    $("#enemy-instructions").remove();
+    $("#controls").empty();
     $("#controls").html('<button class="btn btn-danger" id="attack">Attack</button><button class="btn btn-info" id="reset">Reset</button>')
-    $("#target").html("<h3>Select an enemy!</h3>");
-    console.log("player hit confirm.")
+    enemySelected = true;
+
   });
 
   $("#reset").on("click", function () { // used to reset the game.
@@ -100,9 +99,6 @@ $(document).ready(function () {
     console.log("reset game");
   });
 
-  $("#ready").on("click", function(){ // game is ready to start
-
-  });
 
 
 
