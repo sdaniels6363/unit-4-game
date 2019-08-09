@@ -4,6 +4,10 @@ header{
   background-color: black;
 }
 
+body{
+  background-image: url("../images/bg.jpg");
+}
+
 img{
   position: relative;
   width: 200px;
