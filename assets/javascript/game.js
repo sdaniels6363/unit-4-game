@@ -18,8 +18,7 @@ var originalVaderHP; // stored for if the game is reset, before completion.
 var orginalPalpatineHP; // stored for if the game is reset, before completion.
 var originalObiWanHP; // stored for if the game is reset, before completion.
 
-// ran as the document is loaded.
-$(document).ready(function () {
+function loadGame(){
   $("#player").empty();
   $("#target").empty();
   $("#graveyard-1").empty();
@@ -61,6 +60,15 @@ $(document).ready(function () {
   orginalPalpatineHP = $("#palpatine-hp").text();
   originalObiWanHP = $("#skywalker-hp").text();
 
+}
+
+
+// ran as the document is loaded.
+$(document).ready(function () {
+
+  // run function to load the game
+  loadGame();
+  
   // Inform player they need to select a character.
   $("#player").html('<h3 id="step-instructions">Choose your character!</h3>')
   // Add buttons to controls
@@ -101,19 +109,24 @@ $(document).ready(function () {
 
   });
 
-  $("#attack").on("click",function(){
-    if (playerSelected && enemySelected){ // make sure is a player and enemy selected.
-      var damage = parseInt(playerAtt)*parseInt(attackMultiplier);
+  $("#attack").on("click", function () {
+    if (playerSelected && enemySelected) { // make sure is a player and enemy selected.
+      var damage = parseInt(playerAtt) * parseInt(attackMultiplier);
       playerHP = playerHP - enemyCtr;
       enemyHP = enemyHP - damage;
-      playerHtmlHP = player+"-hp";
-      enemyHtmlHP = enemy+"-hp";
+      playerHtmlHP = player + "-hp";
+      enemyHtmlHP = enemy + "-hp";
       $(playerHtmlHP).text(playerHP);
       $(enemyHtmlHP).text(enemyHP);
       $("#player-notifications").empty();
-      $("#player-notifications").html("You attacked "+enemyName+" for "+damage+" damage.<br>"+enemyName+" countered and dealt "+enemyCtr+" damage to you.");
-      
-      
+      $("#player-notifications").html("You attacked " + enemyName + " for " + damage + " damage.<br>" + enemyName + " countered and dealt " + enemyCtr + " damage to you.");
+
+      if (enemyHP <= 0){
+        $("#enemy").empty(); // remove enemy once defeated
+        enemySelected = false; // set the enemy selected setting for false, so the player must pick another enemy.
+      } else if (playerHP <= 0);
+        $("$player-notifications").text("You lose, press reset to restart the game.");
+
 
       attackMultiplier++
     } else {
@@ -126,6 +139,10 @@ $(document).ready(function () {
     $("#target").find(".combatants").appendTo(".fighters"); // moves enemy back to character selections
     $("#player").empty();
     $("#target").empty();
+    $("#graveyard-1").html("<p>First, choose the character you wish to play as!</p>")
+    $("#graveyard-2").html("<p>Second, choose the character you wish to fight!</p>")
+    $("#graveyard-3").html("<h4>How to Play:</h4><p>Once you have selected your player, the goal is to fight the remaining characters until all of them are defated.  Your enemy's Counter Attack Stat is the one you need to be concerned with.  Your attack stat will double on increment by an increment of itself, on each turn.  For example, if your attack is worth 10, then on turn 2 it's 20, on turn 3 it's 30, and so on.</p>")
+    $("#player-notifications").empty();
     playerSelected = false;
     enemySelected = false;
     console.log("reset game");
