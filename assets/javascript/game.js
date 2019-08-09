@@ -45,7 +45,7 @@ $(document).ready(function () {
   // Inform player they need to select a character.
   $("#player").html('<h3 id="step-instructions">Choose your character!</h3>')
   // Add buttons to controls
-  $("#controls").html('<button class="btn btn-success" id="confirm-player">Confirm Player Selection</button><button class="btn btn-info" id="reset">Reset</button>')
+  $("#controls").html('<button class="btn btn-danger" id="attack">Attack</button><button class="btn btn-info" id="reset">Reset</button>')
 
   // place the game instructions in the graveyard column, we'll remove them once the player has selected ready.
   $("#graveyard-1").html("<p>First, choose the character you wish to play as!</p>")
@@ -59,10 +59,12 @@ $(document).ready(function () {
       player = "#" + character; // set the global variable
       $("#player").empty();
       $("#" + character).appendTo("#player");
+      playerSelected = true;
     } else if (playerSelected === true && enemySelected === false) { // player has been chosen, enemy has not
       enemy = "#" + character;
-      $("#target").empty;
+      $("#target").empty();
       $(enemy).appendTo("#target");
+      enemySelected = true;
     } else if (playerSelected === true && enemySelected === true) { // both player/enemy have been selected
       alert("Cannot change characters.");
     }
@@ -70,30 +72,19 @@ $(document).ready(function () {
 
   });
 
-  $("#confirm-player").on("click", function () {
-    // lock in chosen player
-    $("#controls").empty();
-    $("#controls").html('<button class="btn btn-danger" id="confirm-enemy">Confirm Enemy Selection</button><button class="btn btn-info" id="reset">Reset</button>');
-    $("#target").html('<h3 id="step-instructions">Select an enemy!</h3>');
-    playerSelected = true;
-  });
-
-  $("#confirm-enemy").on("click", function () {
-    // lock in chosen player
-    $("#enemy-instructions").remove();
-    $("#controls").empty();
-    $("#controls").html('<button class="btn btn-danger" id="attack">Attack</button><button class="btn btn-info" id="reset">Reset</button>')
-    enemySelected = true;
-
+  $("#attack").on("click",function(){
+    if (playerSelected && enemySelected){
+      console.log("attack");
+    } else {
+      alert("Please select your player or opponent.");
+    }
   });
 
   $("#reset").on("click", function () { // used to reset the game.
-    var player = $("#player");
-    var target = $("#target");
-    $(player).find(".combatants").appendTo(".fighters"); // moves player back to character selections
-    $(target).find(".combatants").appendTo(".fighters"); // moves enemy back to character selections
-    $(player).empty();
-    $(target).empty();
+    $("#player").find(".combatants").appendTo(".fighters"); // moves player back to character selections
+    $("#target").find(".combatants").appendTo(".fighters"); // moves enemy back to character selections
+    $("#player").empty();
+    $("#target").empty();
     playerSelected = false;
     enemySelected = false;
     console.log("reset game");
