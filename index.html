@@ -27,77 +27,93 @@
   <main>
 
     <div class="container">
-      <div class="row">
-        <!-- contains the row with the fighters. -->
-        <div class="col-md-9 text-center" id="char-choices">
-          <div class="row fighters">
-            <button class="combatants empire" id="darth-vader" data-hp="" data-attack="" data-counter="">
-              <img src="assets/images/darth-vader.jpeg" alt="darth-vader"><br>
-              <span class="attributes">HP: <span id="darth-vader-hp"></span>&nbsp;&nbsp;Att:<span
-                  id="darth-vader-attack"></span>&nbsp;&nbsp;Ctr:<span id="darth-vader-counter"></span></span>
-            </button>
-            <button class="combatants rebel" id="obi-wan" data-hp="" data-attack="" data-counter="">
-              <img src="assets/images/obi-wan.jpg" alt="obi-wan"><br>
-              <span class="attributes">HP: <span id="obi-wan-hp"></span>&nbsp;&nbsp;Att:<span
-                  id="obi-wan-attack"></span>&nbsp;&nbsp;Ctr:<span id="obi-wan-counter"></span></span>
-            </button>
-            <button class="combatants empire" id="palpatine" data-hp="" data-attack="" data-counter="">
-              <img src="assets/images/palpatine.png" alt="palpatine"><br>
-              <span class="attributes">HP: <span id="palpatine-hp"></span>&nbsp;&nbsp;Att:<span
-                  id="palpatine-attack"></span>&nbsp;&nbsp;Ctr:<span id="palpatine-counter"></span></span>
-            </button>
-            <button class="combatants rebel" id="skywalker" data-hp="" data-attack="" data-counter="">
-              <img src="assets/images/skywalker.jpg" alt="skywalker"><br>
-              <span class="attributes">HP: <span id="skywalker-hp"></span>&nbsp;&nbsp;Att:<span
-                  id="skywalker-attack"></span>&nbsp;&nbsp;Ctr:<span id="skywalker-counter"></span></span>
-            </button>
-          </div>
 
-        </div>
-        <div class="col-md-3 text-center" id="graveyard-1">          <!-- this div will contain the photo of the first defeated fighter -->
-        </div>
-      </div>
+
 
       <div class="row">
-        <!-- This row will hold the attacker's target -->
-        <div class="col-md-9 text-center" id="target">
-          <!-- div for target -->
-        </div>
-        <div class="col-md-3 text-center" id="graveyard-2">          <!-- this div will contain the photo of the second defeated fighter -->
 
-        </div>
-      </div>
+        <div class="col-sm-9 text-center">
 
-      <div class="row">
-        <!-- This row will hold the player -->
-        <div class="col-md-9 text-center" id="player">
-        </div>
-        <div class="col-md-3 text-center" id="graveyard-3">
-            <!-- this div will contain the photo of the last defeated fighter -->
-
-        </div>
-      </div>
-
-      <div class="row">
-        <!-- This row will contain the controls -->
-        <div class="col-md-9 text-center">
           <div class="row">
-            <div class="col-md-6 text-center" id="controls">
+            <!-- combatants -->
+
+            <div class="col-sm-12 fighters" id="char-choices">
+
+              <!-- darth vader button -->
+              <button class="combatants" id="darth-vader" data-alliance="empire" data-hp="" data-attack="" data-counter="">
+                <img src="assets/images/darth-vader.jpeg" alt="darth-vader"><br>
+                <span class="attributes">HP: <span id="darth-vader-hp"></span>&nbsp;&nbsp;Att:<span
+                    id="darth-vader-attack"></span>&nbsp;&nbsp;Ctr:<span id="darth-vader-counter"></span></span>
+              </button>
+
+              <!-- obi wan button -->
+              <button class="combatants" id="obi-wan" data-alliance="rebel" data-hp="" data-attack="" data-counter="">
+                <img src="assets/images/obi-wan.jpg" alt="obi-wan"><br>
+                <span class="attributes">HP: <span id="obi-wan-hp"></span>&nbsp;&nbsp;Att:<span
+                    id="obi-wan-attack"></span>&nbsp;&nbsp;Ctr:<span id="obi-wan-counter"></span></span>
+              </button>
+
+              <!-- palpatine button -->
+              <button class="combatants" id="palpatine" data-alliance="empire" data-hp="" data-attack="" data-counter="">
+                <img src="assets/images/palpatine.png" alt="palpatine"><br>
+                <span class="attributes">HP: <span id="palpatine-hp"></span>&nbsp;&nbsp;Att:<span
+                    id="palpatine-attack"></span>&nbsp;&nbsp;Ctr:<span id="palpatine-counter"></span></span>
+              </button>
+
+              <!-- skywalker button -->
+              <button class="combatants" id="skywalker" data-alliance="rebel" data-hp="" data-attack="" data-counter="">
+                <img src="assets/images/skywalker.jpg" alt="skywalker"><br>
+                <span class="attributes">HP: <span id="skywalker-hp"></span>&nbsp;&nbsp;Att:<span
+                    id="skywalker-attack"></span>&nbsp;&nbsp;Ctr:<span id="skywalker-counter"></span></span>
+              </button>
+
             </div>
-            <div class="col-md-6 text-center" id="player-notifications">
+          </div>
+
+
+          <!-- target -->
+          <div class="row arena">
+            <div class="col-sm-12" id="target">
+            </div>
+          </div>
+
+          <!-- player -->
+          <div class="row arena">
+            <div class="col-sm-12" id="player">
+            </div>
+          </div>
+
+          <!-- controls -->
+          <div class="row">
+            <div class="col-sm-4 text-center" id="controls">
+              <button class="btn btn-danger controls" id="attack">Attack</button><br><br>
+              <button class="btn btn-info controls" id="reset">Reset</button>
+            </div>
+            <div class="col-sm-7 text-center" id="player-notifications">
             </div>
           </div>
         </div>
+
+
+
+
+        <div class="col-sm-3 graveyards">
+          <div class="row">
+            <div class="col-sm-12" id="graveyard-1">
+              <h3>Defeated Enemies</h3>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12" id="graveyard-2"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12" id="graveyard-3"></div>
+          </div>
+
         </div>
       </div>
-
-    </div>
-    <div class="row">
-
-    </div>
-
-
-    </div>
 
 
   </main>
