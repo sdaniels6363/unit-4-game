@@ -2,6 +2,7 @@
 var playerSelected = false;
 var enemySelected = false;
 var playerLost = false;
+var playerAlliance;
 
 var player;
 var playerName;
@@ -20,7 +21,6 @@ var remainingEnemies = 3;// set how many enemies there are.
 function loadGame() {
   $("#player").empty();
   $("#target").empty();
-  $("#graveyard-1").empty();
   $("#graveyard-2").empty();
   $("#graveyard-3").empty();
 
@@ -56,8 +56,6 @@ function loadGame() {
 
   // Inform player they need to select a character.
   $("#player").html('<h3 id="step-instructions">Choose your character!</h3>')
-  // Add buttons to controls
-  $("#controls").html('<button class="btn btn-danger controls" id="attack">Attack</button><button class="btn btn-info controls" id="reset">Reset</button>')
 
   // place the game instructions in the graveyard column, we'll remove them once the player has selected a character.  
   // I know inline styling is frowned upon but this only exists at the beginning of the game.  This HTML is temp.
@@ -68,6 +66,9 @@ function loadGame() {
 
 // ran as the document is loaded.
 $(document).ready(function () {
+  // play startup music
+  new Audio("assets/music/cantina.mp3").play();
+
   // run function to load the game
   loadGame();
 
@@ -75,7 +76,7 @@ $(document).ready(function () {
   $(".combatants").on("click", function () {
 
     var character = this.id; // get the ID of the selected combatant
-    
+
     if (playerSelected === false) { // player has not been chosen
       player = "#" + character; // set the global variable
       playerName = character;
@@ -84,6 +85,7 @@ $(document).ready(function () {
       playerSelected = true;
       playerAtt = $(player).attr("data-attack");
       playerHP = $(player).attr("data-hp");
+      playerAlliance = $(player).attr("data-alliance");
       $("#target").empty()
       $("#target").append('<h3 id="step-instructions">Choose your opponent!</h3>');
 
@@ -104,21 +106,17 @@ $(document).ready(function () {
   });
 
   $("#attack").on("click", function () {
-    console.log("click attack.");
-    if (playerSelected && enemySelected && (remainingEnemies === 3)) { // make sure if a player and enemy selected.
-      // if both player and enemy are selected clear screen instructions
-      $("#graveyard-1").empty();
-      $("#graveyard-1").append("<h3>Defeated Enemies<h3>") // sets graveyard column heading
-    }
 
-    if (playerSelected && enemySelected ) { // make sure if a player and enemy selected.
+    if (playerSelected && enemySelected) { // make sure the player and an enemy are selected.
 
-      if (playerLost) { // if the player has lost prevent the attack button from working.
+      if (playerLost) { // if the player has lost, prevent the attack button from working.
         $("#player-notifications").empty()
         $("#player-notifications").append("<h3>You have lost, press reset to start over!</h3>")
       } else { // if the player hasn't lost yet, allow the game to continue
 
-        var damage = parseInt(playerAtt) * parseInt(attackMultiplier); // determines how much damange the player will do per round of attacks
+        // determines how much damange the player will do per round of attacks
+        var damage = parseInt(playerAtt) * parseInt(attackMultiplier);
+
         // player attacks
         enemyHP = enemyHP - damage;
         enemyHtmlHP = enemy + "-hp";
@@ -126,17 +124,25 @@ $(document).ready(function () {
         $("#player-notifications").empty();
         $("#player-notifications").append("<p>You attacked " + enemyName + " for " + damage + " damage.</p>");
 
-        if (enemyHP >= 0) {
+        if (enemyHP > 0) { // if enemy hp is greater than zero, allow the counter attack.
           // enemy attacks
           playerHP = playerHP - enemyCtr;
           playerHtmlHP = player + "-hp";
           $(playerHtmlHP).text(playerHP);
           $("#player-notifications").append("<p>" + enemyName + " countered and dealt " + enemyCtr + " damage to you.</p>");
-          if (playerHP <= 0) {
+          if (playerHP <= 0) { // if the player's hp is less than or equal to zero, the player loses.
             $("#player-notifications").empty()
             $("#player-notifications").append("<h3>You have lost, press reset to start over!</h3>")
             playerLost = true;
 
+            // This part just played music for fun.  If you lose, the theme opposite of your character is played.
+            if (playerAlliance === "rebel") {
+              // if the player selected a rebel player and lost, play the empire's theme.
+              new Audio("assets/music/empire.mp3").play();
+            } else {
+              // if they selected empire player, play rebel theme:
+              new Audio("assets/music/rebel.mp3").play();
+            }
           }
 
         } else if (enemyHP <= 0) { // enemy dies and is moved to graveyard
@@ -146,17 +152,25 @@ $(document).ready(function () {
           // $("#target").empty(); // remove enemy once defeated
           $("#player-notifications").append("<p>You have defeated " + enemyName + "!</p>");
           remainingEnemies = remainingEnemies - 1;
-          if (remainingEnemies === 0) { // if you run out of enemies, announce that you've won
+
+          if (remainingEnemies === 0) { // if you run out of enemies, announce that the player has won.
             $("#player-notifications").empty();
             $("#player-notifications").append("<h1>YOU WIN</h1>");
-            new Audio("assets/music/rebel.mp3").play();
+
+            // This part just played music for fun.  If you there are no remaining enemies, the theme of your character is played.
+            if (playerAlliance === "rebel") {
+              // if the player selected a rebel player and won, play the rebel theme.
+              new Audio("assets/music/rebel.mp3").play();
+            } else {
+              // if they selected empire player, play empire theme:
+              new Audio("assets/music/empire.mp3").play();
+            }
           }
 
-
           enemySelected = false; // set the enemy selected setting for false, so the player must pick another enemy.
-          graveyardPostion++ // increment the graveyard identifier
+          graveyardPostion++ // increment the graveyard identifier, this will move each defeated enemy to a different space
 
-        } 
+        }
 
         attackMultiplier++; //increment the attack multiplier
       }
@@ -174,27 +188,26 @@ $(document).ready(function () {
     $("#graveyard-3").find(".combatants").appendTo(".fighters"); // moves enemy back to character selections
 
 
-    $("#player").empty();
-    $("#target").empty();
-    $("#graveyard-1").html("<h4>How to Play:</h4><p>Once you have selected your player, the goal is to fight the remaining characters until all of them are defated.  Your enemy's Counter Attack Stat is the one you need to be concerned with.  Your attack stat will double on increment by an increment of itself, on each turn.  For example, if your attack is worth 10, then on turn 2 it's 20, on turn 3 it's 30, and so on.</p>")
-    $("#player-notifications").empty();
-    
+    $("#player").empty(); // just any remaining cleanup.
+    $("#target").empty();  // just any remaining cleanup.
+    $("#player-notifications").empty(); // just any remaining cleanup.
+
 
     //hardset variables to original state
     playerSelected = false;
     enemySelected = false;
     playerLost = false;
 
-    player="";
-    playerName="";
-    playerHP="";
-    playerAtt="";
+    player = "";
+    playerName = "";
+    playerHP = "";
+    playerAtt = "";
     attackMultiplier = 1; // we will increment this each attack cycle
 
-    enemy="";
-    enemyName="";
-    enemyHP="";
-    enemyAtt="";
+    enemy = "";
+    enemyName = "";
+    enemyHP = "";
+    enemyAtt = "";
 
     graveyardPostion = 1;// use this to track the graveyard the defeated enemy should go to.
     remainingEnemies = 3;// set how many enemies there are.
@@ -203,13 +216,4 @@ $(document).ready(function () {
 
   });
 
-  pageSnapshot = $("main")
-
-
-
-
 });
-
-
-
-
